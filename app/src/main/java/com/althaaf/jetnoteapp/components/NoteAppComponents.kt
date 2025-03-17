@@ -15,8 +15,9 @@ fun NoteInputText(
     modifier: Modifier = Modifier,
     text: String,
     label: String,
+    maxLine: Int = 1,
     imeAction: ImeAction = ImeAction.Done,
-    keyboardActions: KeyboardActions = KeyboardActions(onDone = {}),
+    onImeAction: () -> Unit = {},
     onTextChange: (String) -> Unit
 ) {
 
@@ -26,8 +27,10 @@ fun NoteInputText(
         value = text,
         onValueChange = onTextChange,
         modifier = modifier,
+        maxLines = maxLine,
         label = { Text(label) },
         keyboardActions = KeyboardActions(onDone = {
+            onImeAction()
             keyboardController?.hide()
         }),
         keyboardOptions = KeyboardOptions(
@@ -40,10 +43,12 @@ fun NoteInputText(
 fun ButtonSave(
     modifier: Modifier = Modifier,
     text: String,
-    onClick: () -> Unit
+    enabled: Boolean = true,
+    onClick: () -> Unit,
     ) {
     Button(
         modifier = modifier,
-        onClick = onClick
+        onClick = onClick,
+        enabled = enabled
     ) { Text(text) }
 }
