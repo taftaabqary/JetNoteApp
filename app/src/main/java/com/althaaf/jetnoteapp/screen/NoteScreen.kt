@@ -100,11 +100,12 @@ fun NoteScreen(
             ButtonSave(
                 text = "Save Note",
             ) {
-                if(titleNote.isNotEmpty() && descriptionNote.isNotEmpty())
+                if(titleNote.isNotEmpty() && descriptionNote.isNotEmpty()) {
                     onAddNote(Note(title = titleNote, description = descriptionNote))
                     Toast.makeText(context, "Success add note data", Toast.LENGTH_SHORT).show()
                     titleNote = ""
                     descriptionNote = ""
+                }
             }
 
             HorizontalDivider(modifier = Modifier.padding(10.dp))
@@ -133,7 +134,7 @@ fun ItemRow(modifier: Modifier = Modifier, note: Note, onClickNote: () -> Unit) 
         Column(modifier.padding(8.dp)) {
             Text(note.title)
             Text(note.description)
-            Text(SimpleDateFormat("EEE, d MMM hh:mm aaa", Locale.getDefault()).format(note.localTime))
+            Text(SimpleDateFormat("EEE, d MMM hh:mm aaa", Locale.getDefault()).format(note.date))
         }
     }
 }
