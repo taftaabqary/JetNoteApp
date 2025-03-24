@@ -18,6 +18,7 @@ class NoteViewModel @Inject constructor(private val noteRepository: NoteReposito
     private var _note: MutableStateFlow<List<Note>> = MutableStateFlow(emptyList())
     val note = _note.asStateFlow()
 
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             noteRepository.getAllNotes()
